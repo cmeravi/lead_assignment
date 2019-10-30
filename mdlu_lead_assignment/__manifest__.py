@@ -11,15 +11,14 @@
 
     'author': "Moddulu Solutions",
     'website': "http://www.moddulu.com",
-    'license' : 'AGPL-3',
     'price': 15.00,
-    'currency': 'USD',
+    'currency': 'EUR',
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/12.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list
     'category': 'Sales',
-    'version': '12.0.1.0',
-    'images': ['static/description/banner.png',],
+    'version': '13.0.1.0',
+    'images': ['static/description/banner.png'],
 
     # any module necessary for this one to work correctly
     'depends': ['base','crm'],

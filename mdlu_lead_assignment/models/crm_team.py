@@ -29,13 +29,15 @@ class Team(models.Model):
     @api.model
     def find_next_team_member(self):
         team_members = [user for user in self.member_ids.sorted(key='id')]
+        if not team_members:
+            team_members.append(self.user_id)
         next_member = self.next_team_member if self.next_team_member else team_members[0]
         next_index = 1
         if team_members and self.next_team_member:
             current_index = team_members.index(self.next_team_member)
             next_index = current_index + 1
-            if next_index > len(team_members)-1:
-                next_index = 0
+        if next_index > len(team_members)-1:
+            next_index = 0
         self.next_team_member = team_members[next_index]
         return next_member
 
@@ -45,6 +47,8 @@ class Team(models.Model):
         next_index = 0
         if len(members)>1:
             next_index = random.randint(0,len(members)-1)
+        elif len(members) == 0:
+            members |= self.user_id
         return members[next_index]
 
     @api.model
