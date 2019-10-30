@@ -11,6 +11,7 @@
 
     'author': "Moddulu Solutions",
     'website': "http://www.moddulu.com",
+    'license' : 'AGPL-3',
     'price': 15.00,
     'currency': 'EUR',
     # Categories can be used to filter modules in modules listing
