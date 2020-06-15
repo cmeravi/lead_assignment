@@ -1,0 +1,87 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mdlu_lead_assignment
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-14 17:08+0000\n"
+"PO-Revision-Date: 2020-06-15 15:51-0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es\n"
+"X-Generator: Poedit 2.3.1\n"
+
+#. module: mdlu_lead_assignment
+#: model:ir.model.fields,help:mdlu_lead_assignment.field_crm_team__lead_assignment
+msgid ""
+"* Creating User - Lead is assigned to the user who created it (this is the system default)\n"
+"* Next Team Member - Keeps track of who was previously assigned and assignes it to the next team member in line.\n"
+"* Lowest Lead Count - Assignes leads to the team member with the lowset lead count.\n"
+"* Randomly Assigned - Assigns leads completely randomly to team members."
+msgstr ""
+"* Usuario creador - Iniciativa es asignada al usuario que la crea (configuración por defecto del sistema)\n"
+"* Próximo miembro del equipo - Realiza un seguimiento de quién fue asignado previamente y lo asigna al siguiente miembro del equipo en línea.\n"
+"* Recuento de iniciativas más bajo - Asigna iniciativas al miembro del equipo con el menor número de iniciativas.\n"
+"* Asignado aleatoriamente - Asigna iniciativas completamente al azar a miembros del equipo."
+
+#. module: mdlu_lead_assignment
+#: model:ir.model.fields.selection,name:mdlu_lead_assignment.selection__crm_team__lead_assignment__user
+msgid "Creating User"
+msgstr "Usuario creador"
+
+#. module: mdlu_lead_assignment
+#: model:ir.model.fields,field_description:mdlu_lead_assignment.field_crm_team__lead_assignment
+msgid "Lead Assignment Options"
+msgstr "Opciones de asignación de iniciativas"
+
+#. module: mdlu_lead_assignment
+#: model:ir.model,name:mdlu_lead_assignment.model_crm_lead
+msgid "Lead/Opportunity"
+msgstr "Iniciativa/Oportunidad"
+
+#. module: mdlu_lead_assignment
+#: model:ir.model.fields.selection,name:mdlu_lead_assignment.selection__crm_team__lead_assignment__lowest_leads
+msgid "Lowest Lead Count"
+msgstr "Recuento de iniciativas más bajo"
+
+#. module: mdlu_lead_assignment
+#: model:ir.model.fields,field_description:mdlu_lead_assignment.field_crm_team__next_team_member
+#: model:ir.model.fields.selection,name:mdlu_lead_assignment.selection__crm_team__lead_assignment__crm_team_next
+msgid "Next Team Member"
+msgstr "Próximo miembro del equipo"
+
+#. module: mdlu_lead_assignment
+#: model:ir.model.fields,field_description:mdlu_lead_assignment.field_crm_team__override_user
+msgid "Override Creating User"
+msgstr "Sobrescribir usuario creador"
+
+#. module: mdlu_lead_assignment
+#: model:ir.model.fields.selection,name:mdlu_lead_assignment.selection__crm_team__lead_assignment__random_assignment
+msgid "Randomly Assigned"
+msgstr "Asignado aleatoriamente"
+
+#. module: mdlu_lead_assignment
+#: model:ir.model.fields,field_description:mdlu_lead_assignment.field_res_users__sales_lead_count
+msgid "Sales Lead Count"
+msgstr "Recuento de iniciativas"
+
+#. module: mdlu_lead_assignment
+#: model:ir.model,name:mdlu_lead_assignment.model_crm_team
+msgid "Sales Team"
+msgstr "Equipo de ventas"
+
+#. module: mdlu_lead_assignment
+#: model:ir.model.fields,help:mdlu_lead_assignment.field_crm_team__override_user
+msgid "This overrides the default method of assignation."
+msgstr "Esto sobrescribe el método por defecto de asignación."
+
+#. module: mdlu_lead_assignment
+#: model:ir.model,name:mdlu_lead_assignment.model_res_users
+msgid "Users"
+msgstr "Usuarios"

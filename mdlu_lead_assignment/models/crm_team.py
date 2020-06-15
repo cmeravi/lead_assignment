@@ -20,7 +20,7 @@ class Team(models.Model):
         ('lowest_leads','Lowest Lead Count'),
         ('random_assignment', 'Randomly Assigned'),
     ], string='Lead Assignment Options', default='user',
-        help="* Creating User - Lead is assigned to the suer who created it (this is the system default)\n"
+        help="* Creating User - Lead is assigned to the user who created it (this is the system default)\n"
              "* Next Team Member - Keeps track of who was previously assigned and assignes it to the next team member in line.\n"
              "* Lowest Lead Count - Assignes leads to the team member with the lowset lead count.\n"
              "* Randomly Assigned - Assigns leads completely randomly to team members.")
@@ -56,5 +56,5 @@ class Team(models.Model):
         next_member = self.env['res.users']
         num_leads = sorted(self.member_ids.mapped('sales_lead_count'))
         member_lowest_leads = self.member_ids.filtered(lambda m: m.sales_lead_count == num_leads[0])
-        next_member = self.next_random_team_member(member_lowest_leads)
+        next_member = self.sudo().next_random_team_member(member_lowest_leads)
         return next_member
