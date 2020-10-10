@@ -12,7 +12,7 @@
     'author': "Moddulu Solutions",
     'website': "http://www.moddulu.com",
     'price': 15.00,
-    'currency': 'EUR',
+    'currency': 'USD',
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/12.0/odoo/addons/base/data/ir_module_category_data.xml
     # for the full list

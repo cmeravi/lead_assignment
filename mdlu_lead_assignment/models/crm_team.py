@@ -13,31 +13,27 @@ class Team(models.Model):
     _inherit = 'crm.team'
 
     override_user = fields.Boolean(string='Override Creating User',
-        help="This overrides the default method of assignation.")
+        help="This overrides user assignment when manually creating a lead.")
     lead_assignment = fields.Selection([
-        ('user', 'Creating User'),
         ('crm_team_next','Next Team Member'),
         ('lowest_leads','Lowest Lead Count'),
         ('random_assignment', 'Randomly Assigned'),
-    ], string='Lead Assignment Options', default='user',
-        help="* Creating User - Lead is assigned to the user who created it (this is the system default)\n"
-             "* Next Team Member - Keeps track of who was previously assigned and assignes it to the next team member in line.\n"
+    ], string='Lead Assignment Options', default='random_assignment',
+        help="* Next Team Member - Keeps track of who was previously assigned and assignes it to the next team member in line.\n"
              "* Lowest Lead Count - Assignes leads to the team member with the lowset lead count.\n"
              "* Randomly Assigned - Assigns leads completely randomly to team members.")
     next_team_member = fields.Many2one('res.users', string='Next Team Member', readonly=True)
 
     @api.model
     def find_next_team_member(self):
-        team_members = [user for user in self.member_ids.sorted(key='id')]
+        team_members = [user for user in self.get_available_team_members().sorted(key='id')]
         if not team_members:
             team_members.append(self.user_id)
-        next_member = self.next_team_member if self.next_team_member else team_members[0]
+        next_member = self.next_team_member if self.next_team_member and self.next_team_member in team_members else team_members[0]
         next_index = 1
         if team_members and self.next_team_member:
-            current_index = team_members.index(self.next_team_member)
-            next_index = current_index + 1
-        if next_index > len(team_members)-1:
-            next_index = 0
+            current_index = team_members.index(self.next_team_member) if self.next_team_member in team_members else 0
+            next_index = (current_index + 1) if (current_index + 1) <= (len(team_members)-1) else 0
         self.next_team_member = team_members[next_index]
         return next_member
 
@@ -54,7 +50,11 @@ class Team(models.Model):
     @api.model
     def lowest_leads_member(self):
         next_member = self.env['res.users']
-        num_leads = sorted(self.member_ids.mapped('sales_lead_count'))
-        member_lowest_leads = self.member_ids.filtered(lambda m: m.sales_lead_count == num_leads[0])
-        next_member = self.sudo().next_random_team_member(member_lowest_leads)
+        num_leads = sorted(self.get_available_team_members().mapped('sales_lead_count'))
+        member_lowest_leads = self.get_available_team_members().filtered(lambda m: m.sales_lead_count == num_leads[0])
+        next_member = self.next_random_team_member(member_lowest_leads)
         return next_member
+
+    @api.model
+    def get_available_team_members(self):
+        return self.member_ids
