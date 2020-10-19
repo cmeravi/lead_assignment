@@ -12,8 +12,6 @@ from odoo.exceptions import ValidationError
 class Team(models.Model):
     _inherit = 'crm.team'
 
-    override_user = fields.Boolean(string='Override Creating User',
-        help="This overrides user assignment when manually creating a lead.")
     lead_assignment = fields.Selection([
         ('crm_team_next','Next Team Member'),
         ('lowest_leads','Lowest Lead Count'),

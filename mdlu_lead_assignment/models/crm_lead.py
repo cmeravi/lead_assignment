@@ -29,13 +29,15 @@ class Lead(models.Model):
     @api.model
     def create(self, vals):
         res = super(Lead, self).create(vals)
-        if res.team_id.id != vals['team_id']:
-            res.team_id = self.env['crm.team'].search([('id','=',vals['team_id'])])
         context = dict(self._context or {})
+        file_import = 'import_file' in context and context['import_file']
         user = self.env['res.users'].search([('id','=',context['uid'])]) if 'uid' in context else False
+        if 'team_id' in vals and res.team_id.id != vals['team_id']:
+            res.team_id = self.env['crm.team'].search([('id','=',vals['team_id'])])
+        elif 'team_id' not in vals and not file_import:
+            res.team_id = user.sale_team_id
         available_team_members = res.team_id.get_available_team_members()
         team_user = user and available_team_members and user in available_team_members
-        file_import = 'import_file' in context and context['import_file']
-        if res.team_id.override_user or not team_user or file_import:
+        if not team_user or file_import:
             res.user_id = res.next_assigned_user(user)
         return res
